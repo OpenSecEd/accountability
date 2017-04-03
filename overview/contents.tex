@@ -1,35 +1,5 @@
-%\documentclass[handout]{beamer}
-\documentclass{beamer}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[ibycus,swedish,english]{babel}
-\usepackage{url}
-\usepackage{varioref,prettyref}
-\usepackage{graphicx}
-\usepackage{color}
-\usepackage{subfig}
-\usepackage{multicol}
-\usepackage{amssymb,amsmath,amsthm}
-\usepackage{booktabs}
-\usepackage[squaren,binary]{SIunits}
-
-\setbeamertemplate{bibliography item}[text]
-\usepackage[natbib,style=alphabetic,maxbibnames=99]{biblatex}
-\addbibresource{overview.bib}
-
-\DeclareMathOperator{\U}{\mathcal{U}}
-\DeclareMathOperator{\T}{\mathcal{T}}
-\DeclareMathOperator{\V}{\mathcal{V}}
-
-\mode<presentation>{%
-  \usetheme{Frankfurt}
-  \setbeamercovered{transparent}
-  \usecolortheme{seagull}
-}
-\setbeamertemplate{footline}{\insertframenumber}
-
 \title{%
-  Accountability and Non-Repudiation
+  Accountability
 }
 \author{Daniel Bosk\footnote{%
   This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 
@@ -43,28 +13,12 @@
 }
 \date{\today}
 
-%\pgfdeclareimage[height=0.65cm]{university-logo}{MU_logotyp_int_CMYK.pdf}
-%\logo{\pgfuseimage{university-logo}}
-
-\AtBeginSection[]{%
-  \begin{frame}<beamer>{Overview}
-    \tableofcontents[currentsection]
-  \end{frame}
-}
-%\AtBeginSubsection[]{%
-%  \begin{frame}<beamer>{Overview}
-%    \tiny
-%    \tableofcontents[currentsubsection,sectionstyle=shaded]
-%  \end{frame}
-%}
-
-\begin{document}
 
 \begin{frame}
   \titlepage{}
 \end{frame}
 
-\begin{frame}{Overview}
+\begin{frame}
   \tableofcontents
 \end{frame}
 
@@ -84,7 +38,7 @@
 
 \subsection{Double-Entry Book-Keeping}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The banks are one of the oldest institutions with a need for strict 
       accountability.
@@ -101,7 +55,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item This principle of keeping a balance of constant zero can be 
       tranferred to other principles.
@@ -117,7 +71,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Note that you shouldn't use the book-keeping system to keep track of 
       whether a user is logged-in or not.
@@ -132,7 +86,7 @@
 
 \subsection{Separation of Duty}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item We have basically two types of separation of duties.
       
@@ -148,7 +102,7 @@
 
 \subsection{Clark-Wilson Security Policy Model}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The Clark-Wilson Security Policy Model is a model for securely 
       implementing a security policy.
@@ -162,7 +116,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Mechanisms for enforcing integrity of the system are:
       \begin{description}
@@ -180,7 +134,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item For this to work:
       \begin{enumerate}
@@ -193,7 +147,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The input to the system is called \emph{unconstrained data items 
       (UDIs)}.
@@ -211,7 +165,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   Certification rules, should be checked so that the policy is consistent:
   \begin{description}
     \item[CR1] IVPs must ensure integrity of CDIs when IVPs are run.
@@ -223,7 +177,7 @@
   \end{description}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   Enforcement rules, describes the mechanisms needed in the system:
   \begin{description}
     \item[ER1] Must maintain and protect list of CDIs each TP can access.
@@ -241,7 +195,7 @@
 
 \subsection{Securing Logging Mechanisms}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item Have a process write log messages to a file.
 
@@ -266,7 +220,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The sysadmin problem can be solved using a clever setup of separation 
       of duty.
@@ -285,7 +239,7 @@
 
 \subsection{Schneier-Kelsey Logs}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The Schneier-Kelsey logging scheme provides a secure logging 
       mechanism for storing logs in an untrusted machine.
@@ -302,7 +256,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item The scheme consists of an untrusted principal \(\U\) and a trusted 
       principal \(T\).
@@ -310,7 +264,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{figure}
     \includegraphics[height=0.7\textheight]{seclog.png}
     \caption{%
@@ -322,7 +276,7 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{\insertsubsectionhead}
+\begin{frame}
   \begin{itemize}
     \item One interesting property is that validation of logs can be delegated 
       to a third party verifier \(\V\).
@@ -332,9 +286,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Referenser}
+\begin{frame}
   \small
   \printbibliography{}
 \end{frame}
 
-\end{document}

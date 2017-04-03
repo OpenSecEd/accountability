@@ -1,10 +1,15 @@
 .PHONY: all
-all: overview.pdf
+all: slides.pdf
 
-SRC=		overview.tex abstract.tex overview.bib
+SRC=		contents.tex overview.bib
 FIGURES=	seclog.png
 
-overview.pdf: ${SRC} ${FIGURES}
+slides.pdf: slides.tex ${SRC} ${FIGURES}
+
+
+.PHONY: clean
+clean:
+	${RM} slides.pdf
 
 
 INCLUDE_MAKEFILES=../makefiles
