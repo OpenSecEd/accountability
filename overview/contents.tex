@@ -40,14 +40,27 @@
 
     \item The main tools developed for this purpose is double-entry 
       book-keeping.
-
-    \item What this means is that all books should be balanced.
-
-    \item A transfer from one account to another must be a credit in one 
-      account and a debit in the other.
-
-    \item I.e.\ when adding them up they equal zero.
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{definition}[Double-entry book-keeping]
+    \begin{itemize}
+      \item Add one entry of \(x\) and one of \(-x\).
+      \item Invariant of zero (\(x+(-x) = 0\)).
+    \end{itemize}
+  \end{definition}
+
+  \begin{example}
+    \begin{itemize}
+      \item All books should be balanced.
+
+      \item A transfer from one account to another must be a credit in one 
+        account and a debit in the other.
+
+      \item I.e.\ when adding them up they equal zero.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \begin{frame}
@@ -67,32 +80,67 @@
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item Note that you shouldn't use the book-keeping system to keep track of 
-      whether a user is logged-in or not.
+  \begin{remark}
+    \begin{itemize}
+      \item Note that you shouldn't use the book-keeping system to keep track of 
+        whether a user is logged-in or not.
 
-    \item You can use more efficient mechanisms for that.
+      \item You can use more efficient mechanisms for that.
 
-    \item But the account should be kept for future reference, in case 
-      something bad happens, then you should be able to see what really 
-      happened.
-  \end{itemize}
+      \item But the account should be kept for future reference, in case 
+        something bad happens, then you should be able to see what really 
+        happened.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
-\subsection{Separation of Duty}
+\subsection{Separation of Duties}
 
 \begin{frame}
-  \begin{itemize}
-    \item We have basically two types of separation of duties.
-      
-    \item These are \emph{dual control} and \emph{functional separation}.
+  \begin{definition}[Separation of duties]
+    \begin{itemize}
+      \item Two or more entities must collude to break the policy.
+      \item Two classes: \emph{dual control} and \emph{functional separation}.
+    \end{itemize}
+  \end{definition}
+\end{frame}
 
-    \item For dual control, two or more staff members must act together to 
-      authorize a transaction.
+\begin{frame}
+  \begin{example}[Dual control]
+    \begin{itemize}
+      \item Two or more staff members must act together to authorize 
+        a transaction.
+    \end{itemize}
+  \end{example}
 
-    \item For functional separation, two or more staff members must act on the 
-      transaction at different points in the transaction path.
-  \end{itemize}
+  \pause{}
+
+  \begin{example}[Dual control on film]
+    \begin{itemize}
+      \item Two guys in a nuclear weapons silo.
+      \item Two keys too far from each other for one to turn simultaneously.
+      \item Both staffers must agree to turn the keys.
+    \end{itemize}
+  \end{example}
+\end{frame}
+
+\begin{frame}
+  \begin{example}[Functional separation]
+    \begin{itemize}
+      \item Two or more staff members must act on the transaction at different 
+        points in the transaction path.
+    \end{itemize}
+  \end{example}
+  
+  \pause{}
+
+  \begin{example}[Functional separation]
+    \begin{itemize}
+      \item Developer team writes the code.
+      \item System administrators deploy it.
+      \item Auditors verifies security.
+    \end{itemize}
+  \end{example}
 \end{frame}
 
 \subsection{Clark-Wilson Security Policy Model}
