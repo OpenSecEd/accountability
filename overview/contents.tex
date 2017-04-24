@@ -162,75 +162,108 @@
 \begin{frame}
   \begin{itemize}
     \item Mechanisms for enforcing integrity of the system are:
-      \begin{description}
-        \item[Well-formed transactions] means objects can only be manipulated 
-          using a specific set of functions, and the users have access to these 
-          functions rather than the objects directly.
+      \begin{itemize}
+        \item Well-formed transactions
 
-        \item[Separation of duties] means users have to collaborate to 
-          manipulate objects and collude to to circumvent the security system.
-      \end{description}
-
-    \item The separation of duties comes in many forms, e.g.\ that it's 
-      different persons who develop, test, certify and run the system.
-
+        \item Separation of duties
+      \end{itemize}
   \end{itemize}
+
+  \pause{}
+
+  \begin{definition}[Well-formed transactions]
+    \begin{itemize}
+      \item A limited set of functions can manipulate an object.
+      \item Users have access to these functions, not the objects.
+    \end{itemize}
+  \end{definition}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item For this to work:
-      \begin{enumerate}
-        \item Subjects have to be identified and authenticated.
-        \item Objects can be manipulated only by a restricted set of functions.
-        \item Subjects can execute only a restricted set of functions.
-        \item A proper audit log must be maintained.
-        \item The system has to be certified to work properly.
-      \end{enumerate}
-  \end{itemize}
+  \begin{block}{Requirements}
+    \begin{enumerate}
+      \item Subjects have to be identified and authenticated.
+      \item Objects can be manipulated only by a restricted set of functions.
+      \item Subjects can execute only a restricted set of functions.
+      \item A proper audit log must be maintained.
+      \item The system has to be certified to work properly.
+    \end{enumerate}
+  \end{block}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item The input to the system is called \emph{unconstrained data items 
-      (UDIs)}.
+  \begin{definition}[Unconstrained data item, UDI]
+    \begin{itemize}
+      \item Input from outside the system.
+      \item From outside the control of the system.
+      \item It can be anything!
+    \end{itemize}
+  \end{definition}
 
-    \item The objects in the system are called \emph{constrained data items 
-      (CDIs)}.
+  \pause{}
 
-    \item Conversion of UDIs to CDIs is a critical part of the system.
-
-    \item CDIs can be manipulated by \emph{transformation procedures (TPs)}.
-
-    \item The integrity of a CDI is checked by an \emph{integrity verification 
-      procedure (IVP)}.
-
-  \end{itemize}
+  \begin{definition}[Constrained data item, CDI]
+    \begin{itemize}
+      \item Objects (data) inside the system.
+      \item This is under the system's control.
+      \item This is well-formed.
+    \end{itemize}
+  \end{definition}
 \end{frame}
 
 \begin{frame}
-  Certification rules, should be checked so that the policy is consistent:
-  \begin{description}
-    \item[CR1] IVPs must ensure integrity of CDIs when IVPs are run.
-    \item[CR2] TPs must be certified to be valid; valid CDIs transform into 
-      valid CDIs; each TP can access restricted set of CDIs.
-    \item[CR3] Access rules must satisfy separation-of-duties requirements.
-    \item[CR4] All TPs must write to an append-only log.
-    \item[CR5] Any TP handling UDI must convert it to a CDI or reject it.
-  \end{description}
+  \begin{remark}
+    \begin{itemize}
+      \item UDIs must be converted to CDIs.
+      \item This is a critical part of the system.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
-  Enforcement rules, describes the mechanisms needed in the system:
-  \begin{description}
-    \item[ER1] Must maintain and protect list of CDIs each TP can access.
-    \item[ER2] Must maintain and protect list of TPs each subject can access.
-    \item[ER3] The system must authenticate each subject requesting to execute 
-      a TP\@.
-    \item[ER4] Only a subject that may certify an access rule for a TP may 
-      modify the respective entry in the list.
-      This subject must not be allowed to execute this TP\@.
-  \end{description}
+  \begin{definition}[Transformation procedure, TP]
+    \begin{itemize}
+      \item Procedure which manipulates CDIs.
+      \item Can take UDI as input, must convert to CDI.
+    \end{itemize}
+  \end{definition}
+
+  \pause{}
+
+  \begin{definition}[Integrity verification procedure, IVP]
+    \begin{itemize}
+      \item Checks the integrity of a CDI.
+    \end{itemize}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Certification rules}
+    Should be checked so that the policy is consistent:
+    \begin{description}
+      \item[CR1] IVPs must ensure integrity of CDIs when IVPs are run.
+      \item[CR2] TPs must be certified to be valid; valid CDIs transform into 
+        valid CDIs; each TP can access restricted set of CDIs.
+      \item[CR3] Access rules must satisfy separation-of-duties requirements.
+      \item[CR4] All TPs must write to an append-only log.
+      \item[CR5] Any TP handling UDI must convert it to a CDI or reject it.
+    \end{description}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{Enforcement rules}
+    Describes the mechanisms needed in the system:
+    \begin{description}
+      \item[ER1] Must maintain and protect list of CDIs each TP can access.
+      \item[ER2] Must maintain and protect list of TPs each subject can access.
+      \item[ER3] The system must authenticate each subject requesting to execute 
+        a TP\@.
+      \item[ER4] Only a subject that may certify an access rule for a TP may 
+        modify the respective entry in the list.
+        This subject must not be allowed to execute this TP\@.
+    \end{description}
+  \end{block}
 \end{frame}
 
 
