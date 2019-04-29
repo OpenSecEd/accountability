@@ -1,7 +1,7 @@
 .PHONY: all
 all: slides.pdf
 
-SRC=		contents.tex overview.bib
+SRC=		contents.tex book-keeping.bib
 FIGURES=	seclog.png
 
 slides.pdf: slides.tex ${SRC} ${FIGURES}

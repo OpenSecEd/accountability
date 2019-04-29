@@ -1,0 +1,117 @@
+\question[3]\label{q:accountability}
+% tags: accountability:E:C
+Explain the idea of double-entry book-keeping.
+
+\begin{solution}
+  It originates from banks.
+  Every entry is either a credit or a debit.
+  Every credit must have a corresponding debit, i.e.\ they cancel each other if 
+  added together.
+  This means that when all entries are added together, the final balance should 
+  be zero.
+  Thus, we keep the constant state of zero balance, and when the final balance 
+  is non-zero we know that something is wrong.
+\end{solution}
+
+
+\question\label{q:accountability}
+% tags: accountability:E
+\begin{parts}
+  \part[2] Explain what dual control is.
+  \begin{solution}
+    In dual control you must be two or more staff members acting on 
+    a transaction together to authorize it.
+    I.e.\ at the same time.
+  \end{solution}
+
+  \part[3] How does dual control differ from functional separation?
+  \begin{solution}
+    Functional separation means that two or more staff members must act on 
+    a transaction at different points in the transaction path.
+    For example one adds the transaction and another approves it.
+    Compare this to the two having to act together at the same time.
+  \end{solution}
+\end{parts}
+
+
+\question[3]\label{q:accountability}
+% tags: accountability:E:C
+What is the purpose of separation of duty?
+
+\begin{solution}
+  The purpose of separation of duty is to make it more difficult for 
+  a malicious entity to subvert the system.
+  E.g.\ a systems developer at the bank should not be able to add a back-door 
+  for himself so that he later can steal money without anyone noticing.
+  If he is only allowed to write the code, but not to certify its correct 
+  function --- then there is a higher chance that he is caught before the 
+  system is launched.
+  So to subvert the system a malicious actor must act together with others.
+\end{solution}
+
+
+\question[6]\label{q:accountability}
+% tags: accountability:C:A
+The Clark-Wilson security policy model was designed to ensure integrity in 
+a system, briefly explain its key points.
+
+\begin{solution}
+  The Clark-Wilson model outlines how to design a system which guarantees 
+  integrity.
+  This means that a system that fulfils the Clark-Wilson requirements will be 
+  secure against malicious attempts to put it into an illegal state.
+
+  It first differentiates between two types of data: untrusted data and trusted 
+  data.
+  Then it requires a finite number of transformations to operate on the data, 
+  never allow any entity to operate on the data directly.
+  The transformations must be able to transfer untrusted data to trusted data 
+  --- or discard it.
+  Then the subjects are allowed to use a finite subset of the transformations.
+  Furthermore it requires separation of duties for setting up the 
+  access-control lists for and executing the transformations.
+\end{solution}
+
+
+\question[2]\label{q:accountability}
+What is the purpose of logging?
+
+\begin{solution}
+  The purpose of logging is to be able to follow how the system has 
+  transitioned between states.
+  We want to do this to be able to find vulnerabilities that might have been 
+  exploited during a breach.
+  Also to verify or reject possible breaches.
+\end{solution}
+
+
+\question[3]\label{q:accountability}
+% tags: accountability:E:C
+Give a brief overview of the most important aspects of a secure logging system.
+
+\begin{solution}
+  The logging system must be stored in a secure location.
+  It must be append only --- i.e.\ no one can read or change the log.
+  There are problems with the administrator of a system, since he or she can 
+  modify the logging system and thus \enquote{hide the tracks}.
+  This must be solved by setting up the logging system with separation of 
+  duties, e.g.\ the logging system of system A is under control of 
+  administrator B and the logging system of system B is under control of 
+  administrator A.
+\end{solution}
+
+
+\question[5]\label{q:accountability}
+% tags: accountability:C:A
+Sometimes it is impossible to have a system online all the times.
+Outline an idea for how you can design a secure logging system for such 
+a system.
+
+\begin{solution}
+  We can use cryptography.
+  We can encrypt and sign each log entry, then we can link the log entries to 
+  each other so we can verify the order.
+  This way we can detect changes in the log.
+  The can use a one-way function to construct a chain of keys where we can only 
+  go forward, so we cannot find previous keys.
+\end{solution}

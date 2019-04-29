@@ -1,4 +1,5 @@
-SUBDIR= 	./overview
+SUBDIR+= 	book-keeping
+SUBDIR+= 	logging
 
 
 INCLUDE_MAKEFILES=makefiles
