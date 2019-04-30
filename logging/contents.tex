@@ -16,91 +16,122 @@
 \subsection{Securing Logging Mechanisms}
 
 \begin{frame}
-  \begin{itemize}
-    \item Have a process write log messages to a file.
+  \begin{example}
+    \begin{itemize}
+      \item Have a process write log messages to a file.
+    \end{itemize}
+  \end{example}
 
-    \item Then the running process must access the file.
-      \begin{itemize}
-        \item Could be done using append only access, thus no reading or 
-          rewriting.
+  \pause
 
-        \item Could trust the process to do a setuid(2) system call.
-
-        \item This saves us from trusting the user -- but only if the user 
-          doesn't have access to the hardware.
-
-      \end{itemize}
-
-    \item We could also log to this or another system via syslog(3), this helps 
-      us if we don't trust the user or the process.
-
-    \item However, the problem remains with the sysadmin who has superuser 
-      access to the system.
-
-  \end{itemize}
+  \begin{remark}
+    \begin{itemize}
+      \item Then the running process must access the file.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item The sysadmin problem can be solved using a clever setup of separation 
-      of duty.
+  \begin{solution}[Log internally]
+    \begin{itemize}
+      \item Could be done using append only access, thus no reading or 
+        rewriting.
+      \item Could trust the program but not the user.
+      \item But only if the user doesn't have access to the hardware.
+    \end{itemize}
+  \end{solution}
 
-    \item E.g.\ the logs of sysadmin \(A\) will be stored under the control of 
-      sysadmins \(B\) and \(C\).
+  \pause
 
-    \item This way sysadmin \(A\) can do everything except modify his own 
-      logging mechanisms.
+  \begin{question}
+    \begin{itemize}
+      \item How do we know if the user has managed to modify the logs?
+    \end{itemize}
+  \end{question}
+\end{frame}
 
-    \item The downside of this is that all systems must be online for this to 
-      work.
+\begin{frame}
+  \begin{solution}[Log externally]
+    \begin{itemize}
+      \item We could log to another system.
+      \item This helps us if we don't trust the user or the process.
+    \end{itemize}
+  \end{solution}
 
-  \end{itemize}
+  \pause
+
+  \begin{remark}
+    \begin{itemize}
+      \item The problem remains with the sysadmin who has superuser access to 
+        the external system.
+    \end{itemize}
+  \end{remark}
+\end{frame}
+
+\begin{frame}
+  \begin{solution}[External with separation-of-duties]
+    \begin{itemize}
+      \item The sysadmin problem can be solved using a clever setup of 
+        separation of duties.
+
+      \item E.g.\ the logs of sysadmin \(A\) will be stored under the control of 
+        sysadmins \(B\) and \(C\).
+
+      \item This way sysadmin \(A\) can do everything except modify his own 
+        logging mechanisms.
+
+      \item The downside of this is that all systems must be online for this to 
+        work.
+    \end{itemize}
+  \end{solution}
 \end{frame}
 
 \subsection{Schneier-Kelsey Logs}
 
 \begin{frame}
-  \begin{itemize}
-    \item The Schneier-Kelsey logging scheme provides a secure logging 
-      mechanism for storing logs in an untrusted machine.
+  \begin{idea}[Schneier--Kelsey logs]
+    \begin{itemize}
+      \item Provides a secure logging mechanism for storing logs in an untrusted 
+        machine.
 
-    \item The untrusted machine \(\U\) is expected to work correctly up to 
-      a time \(t\) when it is compromised by an attacker.
+      \item The untrusted machine is expected to work correctly up to a time 
+        \(t\) when it is compromised by an attacker.
 
-    \item The logging mechanism and the integrity of the logs \(L_1, \ldots, 
-      L_{t-1}\) before \(t\) are provided with confidentiality and integrity.
+      \item The logs \(L_1, \ldots, L_{t-1}\) (before \(t\)) are provided with 
+        confidentiality and integrity.
+    \end{itemize}
+  \end{idea}
 
-    \item All logs \(L_t, L_{t+1}, \ldots\) generated from this point, however, 
-      are under the influence of the attacker.
+  \pause
 
-  \end{itemize}
-\end{frame}
+  \begin{remark}
+    \begin{itemize}
+      \item All logs \(L_t, L_{t+1}, \ldots\) generated from this point, however, 
+        are under the influence of the attacker.
 
-\begin{frame}
-  \begin{itemize}
-    \item The scheme consists of an untrusted principal \(\U\) and a trusted 
-      principal \(T\).
-
-  \end{itemize}
+      \item The adversary can even delete them.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 \begin{frame}
   \begin{figure}
     \includegraphics[height=0.7\textheight]{seclog.png}
     \caption{%
-      Overview of Schneier-Kelsey secure-log scheme; where \(W_j\) is the type 
-      of entry, \(D_j\) is entry data, \(K_j\) is entry key, \(A_j\) is 
-      authentication key, and \(H\) is a one-way function.
+      Schneier-Kelsey secure-log scheme; \(W_j\) is the type of entry, \(D_j\) 
+      is entry data, \(K_j\) is entry key, \(A_j\) is authentication key, and 
+      \(H\) is a one-way function.
       Image:~\cite{schneier1999secure}.
     }
   \end{figure}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item One interesting property is that validation of logs can be delegated 
-      to a third party verifier \(\V\).
-  \end{itemize}
+  \begin{remark}
+    \begin{itemize}
+      \item Validation of logs can be delegated to a third party verifier.
+    \end{itemize}
+  \end{remark}
 \end{frame}
 
 

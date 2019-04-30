@@ -1,2 +1,1 @@
-[Accountability] provides an overview of accountability principles, logging 
-etc.
+[Logging] discusses some aspects of secure logging.
