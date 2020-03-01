@@ -10,7 +10,7 @@ slides.pdf: slides.tex ${SRC} ${FIGURES}
 README.md: video.md abstract.md
 	${CAT} $^ > $@
 
-TEX2MDFLAGS= 	-s --bibliography bibliography.bib -t markdown_strict
+TEX2MDFLAGS= 	-s --bibliography book-keeping.bib -t markdown_strict
 
 .INTERMEDIATE: abstract.md
 
