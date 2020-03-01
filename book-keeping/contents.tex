@@ -1,22 +1,4 @@
-\title{%
-  Accountability
-}
-\author{Daniel Bosk}
-\institute[MIUN IKS]{%
-  Department of Information and Communication Systems,\\
-  Mid Sweden University, SE-851\,70 Sundsvall.
-}
-\date{\today}
-
-
-\begin{frame}
-  \titlepage{}
-\end{frame}
-
-\begin{frame}
-  \tableofcontents
-\end{frame}
-
+\mode*
 
 % Since this a solution template for a generic talk, very little can
 % be said about how it should be structured. However, the talk length
@@ -63,36 +45,42 @@
   \end{example}
 \end{frame}
 
-\begin{frame}
-  \begin{itemize}
-    \item This principle of keeping a balance of constant zero can be 
-      tranferred to other principles.
-
-    \item E.g.\ for each log-in there should be a log-out.
-
-    \item If the difference of number of log-ins \(L_i\) for a user and the 
-      number of log-outs \(L_o\) is zero (\(L_i-L_o = 0\)), then the user is 
-      not currently logged-in.
-
-    \item Hence, the user shouldn't be able to post a comment when the system 
-      is in this state.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{remark}
-    \begin{itemize}
-      \item Note that you shouldn't use the book-keeping system to keep track of 
-        whether a user is logged-in or not.
-
-      \item You can use more efficient mechanisms for that.
-
-      \item But the account should be kept for future reference, in case 
-        something bad happens, then you should be able to see what really 
-        happened.
-    \end{itemize}
-  \end{remark}
-\end{frame}
+%\begin{frame}
+%  \begin{remark}
+%    \begin{itemize}
+%      \item This principle of keeping a balance of constant zero can be 
+%        tranferred to other principles.
+%    \end{itemize}
+%  \end{remark}
+%
+%  \begin{example}
+%    \begin{itemize}
+%      \item E.g.\ for each log-in there should be a log-out.
+%
+%      \item If the difference of number of log-ins \(L_i\) for a user and the 
+%        number of log-outs \(L_o\) is zero (\(L_i-L_o = 0\)), then the user is 
+%        not currently logged-in.
+%
+%      \item Hence, the user shouldn't be able to post a comment when the system 
+%        is in this state.
+%    \end{itemize}
+%  \end{example}
+%\end{frame}
+%
+%\begin{frame}
+%  \begin{remark}
+%    \begin{itemize}
+%      \item Note that you shouldn't use the book-keeping system to keep track of 
+%        whether a user is logged-in or not.
+%
+%      \item You can use more efficient mechanisms for that.
+%
+%      \item But the account should be kept for future reference, in case 
+%        something bad happens, then you should be able to see what really 
+%        happened.
+%    \end{itemize}
+%  \end{remark}
+%\end{frame}
 
 \subsection{Separation of Duties}
 
@@ -138,7 +126,7 @@
     \begin{itemize}
       \item Developer team writes the code.
       \item System administrators deploy it.
-      \item Auditors verifies security.
+      \item Auditors verify it.
     \end{itemize}
   \end{example}
 \end{frame}
@@ -146,17 +134,19 @@
 \subsection{Clark-Wilson Security Policy Model}
 
 \begin{frame}
-  \begin{itemize}
-    \item The Clark-Wilson Security Policy Model is a model for securely 
-      implementing a security policy.
+  \begin{idea}[Clark-Wilson Security Policy Model]
+    \begin{itemize}
+      \item Is a model for securely implementing a security policy.
 
-    \item It ensures \emph{internal consistency}, i.e.\ properties of the 
-      internal state of the system.
+      \item Ensures \emph{internal consistency}, i.e.\ properties of the internal 
+        state of the system.
 
-    \item It also allows for \emph{external consistency}, i.e.\ the relation of 
-      the internal state of the system to the real world.
-      This must however be enforced by e.g.\ auditing.
-  \end{itemize}
+      \item Allows for \emph{external consistency}, i.e.\ the relation of the 
+        internal state of the system to the real world.
+
+      \item The latter must be enforced by auditing.
+    \end{itemize}
+  \end{idea}
 \end{frame}
 
 \begin{frame}
@@ -182,7 +172,7 @@
 \begin{frame}
   \begin{block}{Requirements}
     \begin{enumerate}
-      \item Subjects have to be identified and authenticated.
+      \item Subjects must be authenticated.
       \item Objects can be manipulated only by a restricted set of functions.
       \item Subjects can execute only a restricted set of functions.
       \item A proper audit log must be maintained.
@@ -264,99 +254,6 @@
         This subject must not be allowed to execute this TP\@.
     \end{description}
   \end{block}
-\end{frame}
-
-
-\section{Logging}
-
-\subsection{Securing Logging Mechanisms}
-
-\begin{frame}
-  \begin{itemize}
-    \item Have a process write log messages to a file.
-
-    \item Then the running process must access the file.
-      \begin{itemize}
-        \item Could be done using append only access, thus no reading or 
-          rewriting.
-
-        \item Could trust the process to do a setuid(2) system call.
-
-        \item This saves us from trusting the user -- but only if the user 
-          doesn't have access to the hardware.
-
-      \end{itemize}
-
-    \item We could also log to this or another system via syslog(3), this helps 
-      us if we don't trust the user or the process.
-
-    \item However, the problem remains with the sysadmin who has superuser 
-      access to the system.
-
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item The sysadmin problem can be solved using a clever setup of separation 
-      of duty.
-
-    \item E.g.\ the logs of sysadmin \(A\) will be stored under the control of 
-      sysadmins \(B\) and \(C\).
-
-    \item This way sysadmin \(A\) can do everything except modify his own 
-      logging mechanisms.
-
-    \item The downside of this is that all systems must be online for this to 
-      work.
-
-  \end{itemize}
-\end{frame}
-
-\subsection{Schneier-Kelsey Logs}
-
-\begin{frame}
-  \begin{itemize}
-    \item The Schneier-Kelsey logging scheme provides a secure logging 
-      mechanism for storing logs in an untrusted machine.
-
-    \item The untrusted machine \(\U\) is expected to work correctly up to 
-      a time \(t\) when it is compromised by an attacker.
-
-    \item The logging mechanism and the integrity of the logs \(L_1, \ldots, 
-      L_{t-1}\) before \(t\) are provided with confidentiality and integrity.
-
-    \item All logs \(L_t, L_{t+1}, \ldots\) generated from this point, however, 
-      are under the influence of the attacker.
-
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item The scheme consists of an untrusted principal \(\U\) and a trusted 
-      principal \(T\).
-
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \begin{figure}
-    \includegraphics[height=0.7\textheight]{seclog.png}
-    \caption{%
-      Overview of Schneier-Kelsey secure-log scheme; where \(W_j\) is the type 
-      of entry, \(D_j\) is entry data, \(K_j\) is entry key, \(A_j\) is 
-      authentication key, and \(H\) is a one-way function.
-      Image:~\cite{schneier1999secure}.
-    }
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \begin{itemize}
-    \item One interesting property is that validation of logs can be delegated 
-      to a third party verifier \(\V\).
-  \end{itemize}
 \end{frame}
 
 
