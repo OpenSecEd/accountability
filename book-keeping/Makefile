@@ -1,5 +1,5 @@
 .PHONY: all
-all: slides.pdf
+all: slides.pdf README.md
 
 SRC=		contents.tex book-keeping.bib
 FIGURES=	seclog.png
@@ -21,6 +21,7 @@ abstract.md: abstract.tex
 .PHONY: clean
 clean:
 	${RM} slides.pdf
+	${RM} abstract.md
 
 
 INCLUDE_MAKEFILES=../makefiles
